@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import secrets
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,27 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--*(a2cf)ck*ce75%49_jq=c%tl_n!@1%yka+y1@-wjul8^)ds2'
+secret_key_file = BASE_DIR / "secret_key.txt"
+if secret_key_file.is_file():
+    with secret_key_file.open() as f:
+        SECRET_KEY = f.read().strip()
+else:
+    SECRET_KEY = secrets.token_hex(100)
+    with secret_key_file.open("w") as f:
+        f.write(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Enable debug mode by creating "debug.txt" file in the base directory
+DEBUG = (BASE_DIR / "debug.txt").is_file()
 
-ALLOWED_HOSTS = []
+allowed_hosts_file = BASE_DIR / "allowed_hosts.json"
+try:
+    with allowed_hosts_file.open("r") as f:
+        ALLOWED_HOSTS = json.load(f)
+except FileNotFoundError:
+    ALLOWED_HOSTS = []
+    with allowed_hosts_file.open("w") as f:
+        json.dump([], f)
 
 
 # Application definition
