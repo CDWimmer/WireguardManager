@@ -131,3 +131,9 @@ dmypy.json
 
 # Jetbrains IDE Files
 .idea/
+
+
+# Webpanel config files
+webpanel/allowed_hosts.json
+webpanel/secret_key.txt
+webpanel/debug.txt
