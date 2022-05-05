@@ -1,0 +1,108 @@
+:root {
+    --color-primary: #4CAF50;
+    --color-primary-dark: #388E3C;
+    --color-primary-light: #8BC34A;
+    --color-secondary: #FFC107;
+    --color-secondary-dark: #FFA000;
+    --color-secondary-light: #FFD54F;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+    color: #333;
+    min-height: 100vh;
+    max-width: 100vw;
+}
+
+header {
+    background-color: lightslategrey;
+    padding: 10px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: #fff 2px solid;
+    width:fit-content;
+    margin: auto;
+    padding: 1em;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+    background-color: #fff;
+    margin-top: 40px;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 17px;
+}
+
+.login-form input:focus {
+    outline: 2px solid var(--color-primary-dark);
+}
+
+.login-form input::placeholder {
+    transition: font-size 0.2s;
+    /* text-align: center; */
+}
+
+.login-form input:focus::placeholder {
+    font-size: 0px;
+}
+
+.login-form #login-button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 17px;
+    background-color: var(--color-primary);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.login-form #login-button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.login-form #login-button:focus {
+    outline: 2px solid var(--color-primary-dark);
+}
+
+.login-form .input-line {
+    margin: 0;
+}
+
+.login-form .errorlist {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1em;
+}
