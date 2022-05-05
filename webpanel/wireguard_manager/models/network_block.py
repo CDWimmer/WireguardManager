@@ -40,10 +40,19 @@ class NetworkBlock(models.Model):
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.block = int_to_ip(ip_to_int(self.block) & ((2**self.prefix - 1) << (32-self.prefix)))
 
+        # Check the block is part of the IANA assigned private networks blocks
         for private_block_start, cidr in iana_private_blocks:
             if ip_to_int(self.block) & ((2**cidr - 1) << (32-cidr)) == private_block_start:
                 break
         else:
             raise ValueError("You entered a block that is not in the list of IANA assigned private blocks")
+
+        # Check the block is not part of any other existing block
+        # This is an expensive check and needs to be optimised if possible
+        other_blocks = NetworkBlock.objects.exclude(id=self.id)
+        for other_block in other_blocks:
+            min_cidr = min(other_block.prefix, self.prefix)
+            if ip_to_int(self.block) & ((2**min_cidr - 1) << (32-min_cidr)) == ip_to_int(other_block.block) & ((2**min_cidr - 1) << (32-min_cidr)):
+                raise ValueError(f"You entered a block that overlaps the {other_block} block")
         super().save(force_insert, force_update, using, update_fields)
 
