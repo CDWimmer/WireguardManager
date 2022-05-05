@@ -1,5 +1,4 @@
 {% for field in form %}
-    <p>{{ field.label_tag }} {{ field }}</p>
-    <p>{{ field.errors }}</p>
+    <p class="input-line">{{ field }} <span class="input-error">{{ field.errors }}</span></p>
 {% endfor %}
-{{ form.errors }}
+{{ form.non_field_errors }}

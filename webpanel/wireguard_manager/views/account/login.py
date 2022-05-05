@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect
 
 class LoginForm(forms.Form):
     template_name = "wg_manager/forms/login_form.html"
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Password'}))
 
 
 class LoginView(views.View):
