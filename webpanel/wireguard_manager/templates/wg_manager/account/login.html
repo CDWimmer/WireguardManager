@@ -2,12 +2,14 @@
 
 
 {% block content %}
-<div class="login-form">
-    <h2>Sign in to Wireguard Manager</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button>Log In</button>
-    </form>
+<div class="content">
+    <div class="login-form">
+        <h2>Sign in to WireGuard Manager</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button id="login-button">Log In</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
