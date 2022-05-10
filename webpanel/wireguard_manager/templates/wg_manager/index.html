@@ -2,7 +2,8 @@
 
 
 {% block content %}
-<div class="content">
-    <p>Welcome to WireGuard Manager</p>  
-</div>
+    <p>Welcome to WireGuard Manager</p>
+    <p>Network blocks: <a href="{% url "wg_manager:network_block_list" %}">{{ blocks_count }}</a></p>
+    <p>Network devices: {{ device_count }}</p>
+    <p>Network peerings: {{ peering_count }}</p>
 {% endblock %}

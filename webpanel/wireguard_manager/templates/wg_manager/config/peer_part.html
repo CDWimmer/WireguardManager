@@ -1,0 +1,11 @@
+[Peer]
+PublicKey = {{ peer.public_key }}
+{% if peering.local_peering and peer.listen_port %}
+Endpoint = {{ peer.local_endpoint }}:{{ peer.listen_port }}
+{% elif peer.listen_port %}
+Endpoint = {{ peer.public_endpoint }}:{{ peer.listen_port }}
+{% endif %}
+{% if peer.keep_alive > 0 %}
+PersistenKeepAlive = {{ peer.keep_alive }}
+{% endif %}
+AllowedIPs = {{ peer.address }}/32

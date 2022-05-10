@@ -1,0 +1,5 @@
+{% include 'wg_manager/config/local_part.html' %}
+
+{% for peering, peer in peers %}
+{% include 'wg_manager/config/peer_part.html' %}
+{% endfor %}

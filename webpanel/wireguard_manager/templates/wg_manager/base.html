@@ -5,12 +5,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'wg_manager/index.css' %}">
     <title>WireGuard Manager</title>
+    {% block extra_head %}
+    {% endblock %}
 </head>
 <body>
     <header>
         <h1>WireGuard Manager</h1>
+        {% if user.is_staff %}
+        <a href="{% url "admin:index" %}">Admin Panel</a>
+        {% endif %}
     </header>
-    {% block content %}
-    {% endblock %}
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

@@ -22,6 +22,7 @@ iana_private_blocks = [
 
 
 class NetworkBlock(models.Model):
+    name = models.CharField(max_length=32)
     block = models.GenericIPAddressField(protocol='IPv4', unique=True)
     prefix = models.PositiveSmallIntegerField(
         validators=[
@@ -32,10 +33,10 @@ class NetworkBlock(models.Model):
 
     description = models.TextField(blank=True, default="")
 
-    admins = models.ManyToManyField(settings.AUTH_USER_MODEL, default=None)
+    admins = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __str__(self):
-        return f"{self.block}/{self.prefix}"
+        return f"{self.block}/{self.prefix}: {self.name}"
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.block = int_to_ip(ip_to_int(self.block) & ((2**self.prefix - 1) << (32-self.prefix)))
